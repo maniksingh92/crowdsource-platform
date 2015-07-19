@@ -11,7 +11,7 @@ title:            Stanford CrowdSource Platform
 tagline:          'A better crowdsourcing platform'
 description:      'Documentation and Guide'
 url:              http://hyde.getpoole.com
-baseurl:          /
+baseurl:          /crowdsource-platform
 
 author:
   name:           'Stanford CrowdResearch Team'
