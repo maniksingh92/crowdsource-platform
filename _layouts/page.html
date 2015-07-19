@@ -9,14 +9,14 @@ layout: default
         {% comment %} Link to previous guide step {% endcomment %}
         {% assign prev_idx = page.pos | minus:1 %}
         {% assign prev_page = site.pages | where: 'pos', prev_idx %}
-        <a href="{{ prev_page[0].url }}">&lt;-{{ prev_page[0].title }}</a>
+        <a href="{{ site.baseurl }}{{ prev_page[0].url }}">&lt;-{{ prev_page[0].title }}</a>
       {% endif %}
 
       {% if page.pos != 5 %}
         {% comment %} Link to next guide step {% endcomment %}
         {% assign next_idx = page.pos | plus:1 %}
         {% assign next_page = site.pages | where: 'pos', next_idx %}
-        <a href="{{ next_page[0].url }}">{{ next_page[0].title }}-&gt;</a>
+        <a href="{{ site.baseurl }}{{ next_page[0].url }}">{{ next_page[0].title }}-&gt;</a>
       {% endif %}
     {% endif %}
   {% endif %}
