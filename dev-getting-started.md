@@ -118,7 +118,7 @@ $ python manage.py loaddata fixtures/neilCrowdsourcingRankingData.consoleon
 {% endhighlight %}
 If there are no errors, you are ready to run the app from your local server:
 {% highlight console %}
-$ source venv/bin/activate //if you haven't sourced into the virtual environment
+$ source venv/bin/activate //if you have not sourced into the virtual environment
 $ python manage.py runserver
 {% endhighlight %}
 
