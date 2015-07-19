@@ -26,68 +26,68 @@ The following tools are required in order to run the web server. It is advised, 
 #### 1. Setting up the code on your machine with Git
 
 Create an account on [GitHub](https://github.com/) if you haven't already. This is where the code repository is present online. Once logged in, go to the main official online [repository]({{ site.github.repo }}) and click the fork button. 'Forking' will create an online copy of the repository of the main code, under your GitHub account. This way, you can tinker with your copy of the code without breaking the official code. You should be redirected to a URL similar to `https://github.com/<github-user-name>/crowdsource-platform`. Next, we will download this copy on your machine so that you can actual modify the code. In order to do that, open up your console and navigate to a preferred directory. The following command will download the code locally in a sub-directory 'crowdsource-platform':
-{% highlight js %}
-git clone https://github.com/<github-user-name>/crowdsource-platform
+{% highlight console %}
+$ git clone https://github.com/<github-user-name>/crowdsource-platform
 {% endhighlight %}
 However, you must remember that this is a local copy from YOUR online repository and does not keep itself updated with any independent changes in the main official online repository, as of this step. In order to allow it to read/download changes from the main official online repository, we need to add an 'upstream' which is basically a link which allows git to communicate with the main official repository:
-{% highlight js %}
-cd crowdsource-platform
-git remote add upstream https://github.com/crowdresearch/crowdsource-platform.git
+{% highlight console %}
+$ cd crowdsource-platform
+$ git remote add upstream https://github.com/crowdresearch/crowdsource-platform.git
 {% endhighlight %}
 Now our local repository has the potential to fetch any changes made in the main official online repository by other contributors. The default branch being worked upon is called 'develop2'. You can check your current branch with:
-{% highlight js %}
-git branch
+{% highlight console %}
+$ git branch
 {% endhighlight %}
 Since 'develop2' is the main branch, we would like to keep it as stable as possible and only introduce new code into it once we're sure that our code changes are final. To maintain this stability in your local copy, it will be advisable to branch out and work on a copy of 'develop2':
-{% highlight js %}
-git checkout develop2
-git checkout -b your-branch-name
+{% highlight console %}
+$ git checkout develop2
+$ git checkout -b your-branch-name
 {% endhighlight %}
 Now you can work on the branch 'your-branch-name' and be assured that the original branch 'develop2' is untouched on your local machine. You can branch out as many times as you like from 'develop2' with the above two steps, and switch between different branches with:
-{% highlight js %}
-git checkout any-branch-name
+{% highlight console %}
+$ git checkout any-branch-name
 {% endhighlight %}
 Always remember to name a branch out according to the feature you wish to implement, rather than your name, to make the purpose of the branch clear for you and other developers. At this point you are safe to make any changes you want to the code in these new branches.
 
 Before committing any large code changes, make sure to keep your 'develop2' branch updated with the latest changes from the main online repository. In order to do so, follow these commands:
-{% highlight js %}
-git fetch upstream
-git checkout develop2
-git merge upstream/develop2
+{% highlight console %}
+$ git fetch upstream
+$ git checkout develop2
+$ git merge upstream/develop2
 {% endhighlight %}
 The above commands are self explanatory. You download changes from the online main repository, checkout into the 'develop2' branch and merge the downloaded changes into it. However, a specific feature branch you created is still with the old code. In order to update it with the downloaded changes, follow these commands:
-{% highlight js %}
-git checkout feature-branch-name 
-git merge develop2
+{% highlight console %}
+$ git checkout feature-branch-name 
+$ git merge develop2
 {% endhighlight %}
 After you think that your feature branch is ready, you can upload it to YOUR online repository. You can execute `git status` in your console to review your changes. You can manually choose files to stage by:
-{% highlight js %}
-git add file1 file2 path/to/file3
+{% highlight console %}
+$ git add file1 file2 path/to/file3
 {% endhighlight %}
 or stage all the changed files with:
-{% highlight js %}
-git add .
+{% highlight console %}
+$ git add .
 {% endhighlight %}
 Finally, commit this stage with:
-{% highlight js %}
-git commit -m "The commit message describing the change"
+{% highlight console %}
+$ git commit -m "The commit message describing the change"
 {% endhighlight %}
 Now, the changes have been finalised and can be uploaded to your online repository with:
-{% highlight js %}
-git push origin feature-branch-name
+{% highlight console %}
+$ git push origin feature-branch-name
 {% endhighlight %}
 Follow the prompt in the console and once the upload is successful you can view these changes online at `https://github.com/<github-user-name>/crowdsource-platform`.
 
 #### 2. Setting Up a Local Server
 First we will set up the postgreSQL database. Make sure to create the user exactly as your computer's user account name. Execute the following step by step in your console:
-{% highlight js %}
-sudo -i -u postgres
-initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
-createuser --interactive
-psql
+{% highlight console %}
+$ sudo -i -u postgres
+$ initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
+$ createuser --interactive
+$ psql
 CREATE DATABASE crowdsource_dev ENCODING 'UTF8';
 \q
-exit
+$ exit
 {% endhighlight %}
 Create a `local_settings.py` file in the project root folder and configure it to connect to the Postgres database:
 {% highlight python %}
@@ -100,24 +100,26 @@ DATABASES = {
 {% endhighlight %}
 
 While inside your project root folder, execute:
-{% highlight js %}
-virtualenv venv -p python2
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py makemigrations
-python manage.py migrate
+{% highlight console %}
+$ virtualenv venv -p python2
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+$ python manage.py makemigrations
+$ python manage.py migrate
 {% endhighlight %}
 Next you need to install the remaining dependencies. This is done with help of bower:
-{% highlight js %}
-npm install -g bower
-bower install
+{% highlight console %}
+$ npm install -g bower
+$ bower install
 {% endhighlight %}
 Load data into the database so that we have an initial data to work with:
-{% highlight js %}
-python manage.py loaddata fixtures/neilCrowdsourcingRankingData.json
+{% highlight console %}
+$ python manage.py loaddata fixtures/neilCrowdsourcingRankingData.consoleon
 {% endhighlight %}
 If there are no errors, you are ready to run the app from your local server:
-{% highlight js %}
-source venv/bin/activate //if you haven't sourced into the virtual environment
-python manage.py runserver
+{% highlight console %}
+$ source venv/bin/activate //if you haven't sourced into the virtual environment
+$ python manage.py runserver
 {% endhighlight %}
+
+Congratulations on successfully running your server.
