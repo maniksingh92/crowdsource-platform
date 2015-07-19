@@ -101,16 +101,13 @@ DATABASES = {
 
 While inside your project root folder, execute:
 {% highlight console %}
+$ sudo npm install -g bower
+$ bower install
 $ virtualenv venv -p python2
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 $ python manage.py makemigrations
 $ python manage.py migrate
-{% endhighlight %}
-Next you need to install the remaining dependencies. This is done with help of bower:
-{% highlight console %}
-$ npm install -g bower
-$ bower install
 {% endhighlight %}
 Load data into the database so that we have an initial data to work with:
 {% highlight console %}
